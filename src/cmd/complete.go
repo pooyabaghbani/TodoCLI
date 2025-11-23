@@ -4,18 +4,19 @@ Copyright © 2025 NAME HERE <EMAIL ADDRESS>
 package cmd
 
 import (
-	"fmt"
-
+	"github.com/pooyabaghbani/TodoCLI/src/todo"
 	"github.com/spf13/cobra"
 )
 
 // completeCmd represents the complete command
 var completeCmd = &cobra.Command{
-	Use:   "complete",
+	Use:   "complete <taskid>",
 	Short: "Complete a task",
 	Long:  `Complete a task that is already in your tasks list by given ID`,
+	Args:  cobra.ExactArgs(1),
 	Run: func(cmd *cobra.Command, args []string) {
-		fmt.Println("complete called")
+		taskid := args[0]
+		todo.Complete(taskid)
 	},
 }
 

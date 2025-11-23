@@ -22,7 +22,7 @@ func Add(description string) {
 	// open file
 	file, err := os.OpenFile(CSV_FILE_NAME, os.O_RDWR, 0644)
 	if err != nil {
-		log.Fatalf("An error occurred opening the file %v", err)
+		log.Fatalf("An error occurred opening the file: %v", err)
 		return
 	}
 	defer file.Close()
@@ -31,7 +31,7 @@ func Add(description string) {
 	r := csv.NewReader(file)
 	existingRecords, err := r.ReadAll()
 	if err != nil {
-		log.Fatalln("error reading records from data:", err)
+		log.Fatalln("error reading records from data: ", err)
 		return
 	}
 
@@ -41,7 +41,7 @@ func Add(description string) {
 		lastItem := existingRecords[len(existingRecords)-1]
 		i, err := strconv.Atoi(lastItem[0])
 		if err != nil {
-			log.Fatalf("An error occurred reading id %v", err)
+			log.Fatalf("An error occurred reading id: %v", err)
 			return
 		}
 		newItemID = i + 1
@@ -51,13 +51,13 @@ func Add(description string) {
 	newItemTime := time.Now().Format(time.RFC3339)
 
 	// record
-	record := []string{strconv.Itoa(newItemID), description, newItemTime, "false"}
+	record := []string{strconv.Itoa(newItemID), description, newItemTime, "0"}
 
 	// add record
 	w := csv.NewWriter(file)
 	err = w.Write(record)
 	if err != nil {
-		log.Fatalln("error writing record to data:", err)
+		log.Fatalln("error writing record to data: ", err)
 		return
 	}
 	w.Flush()

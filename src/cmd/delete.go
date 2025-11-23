@@ -4,18 +4,18 @@ Copyright © 2025 NAME HERE <EMAIL ADDRESS>
 package cmd
 
 import (
-	"fmt"
-
 	"github.com/spf13/cobra"
 )
 
 // deleteCmd represents the delete command
 var deleteCmd = &cobra.Command{
-	Use:   "delete",
+	Use:   "delete <taskid>",
 	Short: "Delete a task",
 	Long:  `Delete a task from your tasks list by given ID`,
+	Args:  cobra.ExactArgs(1),
 	Run: func(cmd *cobra.Command, args []string) {
-		fmt.Println("delete called")
+		// taskid := args[0]
+		// todo.Complete(taskid)
 	},
 }
 

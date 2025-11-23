@@ -5,6 +5,7 @@ import (
 	"fmt"
 	"log"
 	"os"
+	"strconv"
 	"text/tabwriter"
 	"time"
 
@@ -39,11 +40,19 @@ func List(returnAll bool) {
 			log.Fatalf("An error occurred reading the time: %v", err)
 			return
 		}
-		recordTime := timediff.TimeDiff(t)
+
+		recordID, recordDescription, recordTime := v[0], v[1], timediff.TimeDiff(t)
+		isComplete, err := strconv.ParseBool(v[3])
+		if err != nil {
+			log.Fatal("Unknown boolean value on record!")
+			return
+		}
+		recordIsComeplete := strconv.FormatBool(isComplete)
+
 		if returnAll {
-			fmt.Fprintf(w, "%s\t%s\t%s\t%s\n", v[0], v[1], recordTime, v[3])
-		} else if v[3] == "false" {
-			fmt.Fprintf(w, "%s\t%s\t%s\t%s\n", v[0], v[1], recordTime, v[3])
+			fmt.Fprintf(w, "%s\t%s\t%s\t%s\n", recordID, recordDescription, recordTime, recordIsComeplete)
+		} else if v[3] == "0" {
+			fmt.Fprintf(w, "%s\t%s\t%s\t%s\n", recordID, recordDescription, recordTime, recordIsComeplete)
 		}
 	}
 
