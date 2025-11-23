@@ -4,6 +4,7 @@ Copyright © 2025 NAME HERE <EMAIL ADDRESS>
 package cmd
 
 import (
+	"github.com/pooyabaghbani/TodoCLI/src/todo"
 	"github.com/spf13/cobra"
 )
 
@@ -14,8 +15,8 @@ var deleteCmd = &cobra.Command{
 	Long:  `Delete a task from your tasks list by given ID`,
 	Args:  cobra.ExactArgs(1),
 	Run: func(cmd *cobra.Command, args []string) {
-		// taskid := args[0]
-		// todo.Complete(taskid)
+		taskid := args[0]
+		todo.Delete(taskid)
 	},
 }
 
