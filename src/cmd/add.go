@@ -11,7 +11,7 @@ import (
 // addCmd represents the add command
 var addCmd = &cobra.Command{
 	Use:   "add <description>",
-	Short: "Add a task to your tasks list",
+	Short: "Add a task to your tasks",
 	Long:  `Add a task to your tasks list with the specified description.`,
 	Args:  cobra.ExactArgs(1),
 	Run: func(cmd *cobra.Command, args []string) {
